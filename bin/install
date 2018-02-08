@@ -19,7 +19,7 @@ install_sonarscanner() {
   curl -L -s "$download_url" -o "download.zip"
   unzip "download.zip" > /dev/null || exit 1
 
-  pushd "sonar-scanner-${version}-$(get_platform)"
+  pushd "sonar-scanner-${version}-$(get_platform)" > /dev/null
   cp -r . $install_path
   popd > /dev/null
 
