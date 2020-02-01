@@ -38,7 +38,7 @@ get_download_url() {
   local version=$2
 
   local platform=$(get_platform)
-  echo "https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${version}-${platform}.zip"
+  echo "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${version}-${platform}.zip"
 }
 
 install_plugin "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
