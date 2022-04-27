@@ -14,4 +14,4 @@ asdf plugin-add sonarscanner https://github.com/virtualstaticvoid/asdf-sonarscan
 
 Check [asdf](https://github.com/asdf-vm/asdf) readme for instructions on how to install & manage versions of sonarscanner.
 
-[util]: https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner
+[util]: https://docs.sonarqube.org/latest/
