@@ -8,6 +8,7 @@
 
 ```
 asdf plugin-add sonarscanner https://github.com/virtualstaticvoid/asdf-sonarscanner.git
+asdf install sonarscanner latest
 ```
 
 ## Use
