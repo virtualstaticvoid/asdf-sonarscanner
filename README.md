@@ -1,6 +1,6 @@
 # asdf-sonarscanner
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/virtualstaticvoid/asdf-sonarscanner/Main%20Workflow?style=flat-square)](https://github.com/virtualstaticvoid/asdf-sonarscanner/actions)
+[![Main Workflow](https://github.com/virtualstaticvoid/asdf-sonarscan/actions/workflows/workflow.yml/badge.svg)](https://github.com/virtualstaticvoid/asdf-sonarscan/actions/workflows/workflow.yml)
 
 [`sonarscanner`][util] plugin for [asdf](https://github.com/asdf-vm/asdf) version manager
 
