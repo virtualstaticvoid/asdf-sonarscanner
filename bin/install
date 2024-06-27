@@ -30,7 +30,7 @@ install_plugin() {
 }
 
 get_platform() {
-  [ "Linux" = "$(uname)" ] && echo "linux" || echo "macosx"
+  [ "Linux" = "$(uname)" ] && echo "linux" || echo "macosx-x64"
 }
 
 get_download_url() {
