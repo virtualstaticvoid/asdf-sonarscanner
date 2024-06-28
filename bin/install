@@ -30,7 +30,19 @@ install_plugin() {
 }
 
 get_platform() {
-  [ "Linux" = "$(uname)" ] && echo "linux" || echo "macosx-x64"
+  if [ "$(uname)" = "Linux" ]; then
+    if [ "$(uname -m)" = "aarch64" ]; then
+      echo "linux-aarch64"
+    else
+      echo "linux-x64"
+    fi
+  else
+    if [ "$(uname -m)" = "arm64" ]; then
+      echo "macosx-aarch64"
+    else
+      echo "macosx-x64"
+    fi
+  fi
 }
 
 get_download_url() {
