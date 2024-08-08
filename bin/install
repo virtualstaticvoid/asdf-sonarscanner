@@ -50,7 +50,7 @@ get_platform() {
     ;;
     #Mac OS
     Darwin)
-      if [[ "$version" < "6.1.0.4477" ]]; then
+      if [[ $(semVer $version) -lt $(semVer $breakingVersion) ]]; then
         echo "macosx"
       elif [ "$(uname -m)" = "arm64" ]; then
         echo "macosx-aarch64"
