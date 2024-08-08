@@ -31,17 +31,19 @@ install_plugin() {
 
 get_platform() {
   if [ "$(uname)" = "Linux" ]; then
-    if [ "$(uname -m)" = "aarch64" ]; then
-      echo "linux-aarch64"
-    else
-      echo "linux-x64"
+    if [[ "$version" < "6.1.0.4477" ]]; then
+      echo "linux"
+    elif [ "$(uname -m)" = "aarch64" ]; then
+        echo "linux-aarch64"
+      else
+        echo "linux-x64"
     fi
-  else
-    if [ "$(uname -m)" = "arm64" ]; then
-      echo "macosx-aarch64"
-    else
-      echo "macosx-x64"
-    fi
+  elif [[ "$version" < "6.1.0.4477" ]]; then
+      echo "macosx"
+    elif [ "$(uname -m)" = "arm64" ]; then
+        echo "macosx-aarch64"
+      else
+        echo "macosx-x64"
   fi
 }
 
