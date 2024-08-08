@@ -29,23 +29,36 @@ install_plugin() {
   rm -rf $tmp_download > /dev/null
 }
 
+semVer() {
+  printf "%03d%03d%03d%03d" $(echo "$1" | tr '.' ' ');
+}
+
 get_platform() {
   local version=$1
-  if [ "$(uname)" = "Linux" ]; then
-    if [[ "$version" < "6.1.0.4477" ]]; then
-      echo "linux"
-    elif [ "$(uname -m)" = "aarch64" ]; then
+  local breakingVersion="6.1.0.4477"
+
+  case $(uname) in
+    #Linux OS
+    Linux)
+      if [[ $(semVer $version) -lt $(semVer $breakingVersion) ]]; then
+        echo "linux"
+      elif [ "$(uname -m)" = "aarch64" ]; then
         echo "linux-aarch64"
       else
         echo "linux-x64"
-    fi
-  elif [[ "$version" < "6.1.0.4477" ]]; then
-      echo "macosx"
-    elif [ "$(uname -m)" = "arm64" ]; then
+      fi
+    ;;
+    #Mac OS
+    Darwin)
+      if [[ "$version" < "6.1.0.4477" ]]; then
+        echo "macosx"
+      elif [ "$(uname -m)" = "arm64" ]; then
         echo "macosx-aarch64"
       else
         echo "macosx-x64"
-  fi
+      fi
+    ;;
+  esac
 }
 
 get_download_url() {
