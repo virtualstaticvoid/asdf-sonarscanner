@@ -20,7 +20,7 @@ install_plugin() {
   curl -L -s "$download_url" -o "download.zip"
   unzip "download.zip" > /dev/null || exit 1
 
-  pushd "sonar-scanner-${version}-$(get_platform)" > /dev/null
+  pushd "sonar-scanner-${version}-$(get_platform $version)" > /dev/null
   cp -r . $install_path
   popd > /dev/null
 
@@ -30,6 +30,7 @@ install_plugin() {
 }
 
 get_platform() {
+  local version=$1
   if [ "$(uname)" = "Linux" ]; then
     if [[ "$version" < "6.1.0.4477" ]]; then
       echo "linux"
@@ -51,7 +52,7 @@ get_download_url() {
   local install_type=$1
   local version=$2
 
-  local platform=$(get_platform)
+  local platform=$(get_platform $version)
   echo "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${version}-${platform}.zip"
 }
 
