@@ -20,7 +20,7 @@ install_plugin() {
   curl -L -s "$download_url" -o "download.zip"
   unzip "download.zip" > /dev/null || exit 1
 
-  pushd "sonar-scanner-${version}-$(get_platform)" > /dev/null
+  pushd "sonar-scanner-${version}-$(get_platform $version)" > /dev/null
   cp -r . $install_path
   popd > /dev/null
 
@@ -29,27 +29,43 @@ install_plugin() {
   rm -rf $tmp_download > /dev/null
 }
 
+semVer() {
+  printf "%03d%03d%03d%03d" $(echo "$1" | tr '.' ' ');
+}
+
 get_platform() {
-  if [ "$(uname)" = "Linux" ]; then
-    if [ "$(uname -m)" = "aarch64" ]; then
-      echo "linux-aarch64"
-    else
-      echo "linux-x64"
-    fi
-  else
-    if [ "$(uname -m)" = "arm64" ]; then
-      echo "macosx-aarch64"
-    else
-      echo "macosx-x64"
-    fi
-  fi
+  local version=$1
+  local breakingVersion="6.1.0.4477"
+
+  case $(uname) in
+    #Linux OS
+    Linux)
+      if [[ $(semVer $version) -lt $(semVer $breakingVersion) ]]; then
+        echo "linux"
+      elif [ "$(uname -m)" = "aarch64" ]; then
+        echo "linux-aarch64"
+      else
+        echo "linux-x64"
+      fi
+    ;;
+    #Mac OS
+    Darwin)
+      if [[ $(semVer $version) -lt $(semVer $breakingVersion) ]]; then
+        echo "macosx"
+      elif [ "$(uname -m)" = "arm64" ]; then
+        echo "macosx-aarch64"
+      else
+        echo "macosx-x64"
+      fi
+    ;;
+  esac
 }
 
 get_download_url() {
   local install_type=$1
   local version=$2
 
-  local platform=$(get_platform)
+  local platform=$(get_platform $version)
   echo "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${version}-${platform}.zip"
 }
 

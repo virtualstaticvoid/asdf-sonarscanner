@@ -25,3 +25,19 @@ jobs:
           command: sonar-scanner -v
         env:
           GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: asdf_plugin_test_6_0_0_4432
+        uses: asdf-vm/actions/plugin-test@v1.0.1
+        with:
+          command: sonar-scanner --help
+          version: 6.0.0.4432
+        env:
+          GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: asdf_plugin_test_6_1_0_4477
+        uses: asdf-vm/actions/plugin-test@v1.0.1
+        with:
+          command: sonar-scanner --help
+          version: 6.1.0.4477
+        env:
+          GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
