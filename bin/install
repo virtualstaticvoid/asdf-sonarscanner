@@ -40,7 +40,7 @@ get_platform() {
   case $(uname) in
     #Linux OS
     Linux)
-      if [[ $(semVer $version) -lt $(semVer $breakingVersion) ]]; then
+      if [[ "$(semVer $version)" < "$(semVer $breakingVersion)" ]]; then
         echo "linux"
       elif [ "$(uname -m)" = "aarch64" ]; then
         echo "linux-aarch64"
@@ -50,7 +50,7 @@ get_platform() {
     ;;
     #Mac OS
     Darwin)
-      if [[ $(semVer $version) -lt $(semVer $breakingVersion) ]]; then
+      if [[ "$(semVer $version)" < "$(semVer $breakingVersion)" ]]; then
         echo "macosx"
       elif [ "$(uname -m)" = "arm64" ]; then
         echo "macosx-aarch64"
